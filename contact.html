@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MebMag — Контакты</title>
+  <meta name="description" content="Контактная страница MebMag — напишите или позвоните нам" />
+  <style>
+    :root{
+      --bg:#f6f8fb;
+      --card:#ffffff;
+      --accent:#0ea5a4;
+      --text:#0f1724;
+      --muted:#5b6b73;
+      --radius:12px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:linear-gradient(180deg,#eef6f7 0%,var(--bg) 100%);
+      color:var(--text);
+      padding:24px;
+    }
+    .container{
+      width:100%;
+      max-width:900px;
+      background:var(--card);
+      border-radius:18px;
+      box-shadow:0 10px 30px rgba(16,24,40,0.08);
+      padding:32px;
+      display:flex;
+      gap:28px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .brand {
+      display:flex;
+      gap:18px;
+      align-items:center;
+      min-width:0;
+    }
+    .logo {
+      width:84px;
+      height:84px;
+      border-radius:14px;
+      background:linear-gradient(135deg,var(--accent),#06877f);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-shrink:0;
+      box-shadow:0 8px 24px rgba(14,165,164,0.12);
+    }
+    .logo svg{width:44px;height:44px;fill:#fff}
+
+    .info {
+      min-width:0;
+    }
+    h1{margin:0;font-size:26px;line-height:1}
+    p.lead{margin:6px 0 0;color:var(--muted)}
+
+    .actions {
+      margin-left:auto;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .btn {
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      padding:10px 14px;
+      border-radius:12px;
+      font-weight:600;
+      font-size:14px;
+      color:var(--card);
+      background:var(--accent);
+      box-shadow:0 6px 18px rgba(14,165,164,0.12);
+    }
+    .btn.ghost{
+      background:transparent;
+      color:var(--text);
+      border:1px solid rgba(15,23,36,0.06);
+      box-shadow:none;
+    }
+    .btn.secondary{
+      background:#111827;
+      color:white;
+      box-shadow:0 8px 24px rgba(17,24,39,0.12);
+    }
+
+    .contacts {
+      width:100%;
+      margin-top:18px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .note { color:var(--muted); font-size:13px; margin-top:12px; width:100% }
+
+    @media (max-width:720px){
+      .container{padding:20px;flex-direction:column;align-items:stretch}
+      .actions{margin-left:0;justify-content:flex-start}
+      .logo{width:68px;height:68px}
+      h1{font-size:20px}
+    }
+  </style>
+<style>
+  /* Базовый курсор */
+  body {
+    cursor: url('photo/pack399.png'), auto;
+  }
+
+  /* Наведение на кнопки */
+  button, .btn, a {
+    cursor: url('photo/pack399.png'), pointer;
+  }
+</style>
+</head>
+<body>
+  <main class="container" role="main" aria-labelledby="site-title">
+    <div class="brand" aria-hidden="false">
+      <div class="logo" aria-hidden="true">
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M8 48V8h8l12 24 12-24h8v40h-8V16L32 44 16 16v32H8z"/>
+        </svg>
+      </div>
+
+      <div class="info">
+        <h1 id="site-title">MebMag</h1>
+        <p class="lead">Мебель для уюта — напишите или позвоните нам</p>
+
+        <div class="contacts" id="contacts" aria-label="Контактные способы">
+          <a class="btn" href="mailto:magzhantolebai07@gmail.com" title="Написать на email">
+            ✉ Написать на email
+          </a>
+
+        
+          <a class="btn ghost" href="tel:+77475729122" title="Позвонить">
+            ☎ Позвонить: +7 747 572 9122
+          </a>
+
+        
+          <a class="btn secondary" href="https://wa.me/+77475729122" target="_blank" rel="noopener" title="Написать в WhatsApp">
+            💬 WhatsApp
+          </a>
+
+          
+          <a class="btn ghost" href="https://t.me/tmd" target="_blank" rel="noopener" title="Написать в Telegram">
+            ✈ Telegram
+          </a>
+        </div>
+
+        <p class="note">Или перейдите в раздел «Контакты» — мы ответим в рабочее время.</p>
+      </div>
+    </div>
+
+    <div class="actions" aria-hidden="true">
+      <a class="btn" href="#contacts">Контакты</a>
+      <a class="btn ghost" href="magzhantolebai07@gmail.com">Написать на email</a>
+      <a class="btn ghost" href="tel:+7475729122">Позвонить</a>
+      <a class="btn secondary" href="https://wa.me/+7475729122" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="btn ghost" href="https://t.me/tmd" target="_blank" rel="noopener">Telegram</a>
+   <button type="button" id="backBtn">← Назад</button>
+
+    </div>
+  </main>
+</body >
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MebMag — Главная</title>
+</head>
+<body>
+
+
+  <section id="contact-mebmag" style="max-width:980px;margin:20px auto;padding:16px;">
+    <h2 style="margin:0 0 8px;">MebMag — Алматы</h2>
+    <p style="margin:0 0 12px;">
+      Адрес: г. Алматы, просп. Достык, 140<br>
+      Телефон: <a href="tel:+77475729122">+7 747 572 9122</a>
+    </p>
+
+
+    <div style="width:100%;height:420px;border-radius:12px;overflow:hidden;border:1px solid rgba(0,0,0,0.08);">
+      <iframe
+        title="MebMag — Алматы (Google Maps)"
+        src="https://maps.google.com/maps?q=43.238949,76.889709&z=15&output=embed"
+        width="100%"
+        height="100%"
+        style="border:0;"
+        loading="lazy"
+        aria-label="Карта MebMag — Алматы">
+      </iframe>
+    </div>
+
+    <p style="font-size:13px;color:#666;margin-top:8px;">
+      Открыть в полном размере: <a href="https://maps.google.com/?q=43.238949,76.889709" target="_blank" rel="noopener">посмотреть в Google Maps</a>
+    </p>
+  </section>
+
+<script>
+  document.getElementById('backBtn').addEventListener('click', () => {
+    history.back(); // или history.go(-1)
+  });
+
+  document.getElementById('forwardBtn').addEventListener('click', () => {
+    history.forward(); // или history.go(1)
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Магазин мебели «MebMag»</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f0f0f0; margin: 0; }
+    .header { background: #337ab7; color: #fff; padding: 12px; text-align: center; }
+    .nav a { color: #fff; text-decoration: none; margin: 0 6px; }
+    .container { width: 800px; margin: 20px auto; background: #fff; padding: 12px; border: 1px solid #ccc; }
+    .product { border: 1px solid #ddd; padding: 10px; margin: 10px 0; display: flex; }
+    .product img { width: 120px; height: 100px; object-fit: cover; }
+    .price { color: red; font-weight: bold; margin-top: 6px; }
+    .btn { background: #28a745; color: #fff; border: none; padding: 6px 8px; border-radius: 3px; cursor: pointer; }
+    .footer { text-align: center; color: #666; font-size: 12px; padding: 14px 0; }
+@media (prefers-reduced-motion: reduce) {
+  .animated, .product, .hero-content, .btn { transition: none !important; animation: none !important; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+@keyframes floatY {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+.animated { opacity: 0; transform: translateY(14px); transition: opacity 420ms ease, transform 420ms cubic-bezier(.2,.9,.2,1); }
+.animated.in-view { opacity: 1; transform: translateY(0); }
+
+.hero-content.animated { animation: fadeInUp 700ms ease both; }
+
+.product {
+  transition: transform 260ms cubic-bezier(.2,.9,.2,1), box-shadow 260ms ease;
+  will-change: transform;
+  transform-origin: center;
+  backface-visibility: hidden;
+}
+.product:hover,
+.product:focus-within {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 18px 36px rgba(34,34,34,0.12);
+  z-index: 2;
+}
+
+.product img {
+  transition: transform 420ms cubic-bezier(.2,.9,.2,1);
+}
+.product:hover img { transform: scale(1.07); }
+
+.btn {
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+  will-change: transform;
+}
+.btn:hover, .btn:focus {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+}
+
+.price {
+  display: inline-block;
+  transition: transform 220ms ease, color 220ms ease;
+}
+.price:hover { animation: pulse 900ms ease 1; color: #c41616; }
+
+.video-link {
+  display: inline-block;
+  transform-origin: center;
+  transition: transform 420ms cubic-bezier(.2,.9,.2,1);
+}
+.video-link:hover { animation: floatY 1600ms ease-in-out infinite; }
+
+.btn.add-feedback {
+  position: relative;
+  overflow: visible;
+}
+.btn.add-feedback:active {
+  transform: scale(.96);
+}
+
+.toast-add {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 260ms ease, transform 260ms ease;
+  z-index: 9999;
+}
+.toast-add.show { opacity: 1; transform: translateY(0); }
+
+a:focus, button:focus {
+  outline: 3px solid rgba(51,122,183,0.25);
+  outline-offset: 3px;
+}
+  </style>
+<style>
+.table-box {
+  margin: 20px auto;
+  width: 100%;
+  max-width: 900px;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+.table-title {
+  background: #337ab7;
+  color: #fff;
+  padding: 12px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.table-products {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-products th {
+  background: #f7f7f7;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.table-products td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.table-products tr:hover {
+  background: #f0f8ff;
+}
+
+.table-products img {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+</style>
+
+<style>
+  /* Базовый курсор */
+  body {
+    cursor: url('photo/pack399.png'), auto;
+  }
+
+  /* Наведение на кнопки */
+  button, .btn, a {
+    cursor: url('photo/pack399.png'), pointer;
+  }
+</style>
+
+</head>
+<body>
+
+  <div class="header">
+    <h1>Магазин мебели «MebMag» </h1>
+    <div class="nav">
+      <a href="C:\Users\1\Desktop\html\главная.html">Главная</a> |
+      <a href="C:\Users\1\Desktop\html\дз.html">Каталог</a> |
+      <a href="C:\Users\1\Desktop\html\contact.html">Контакты</a>
+    </div>
+  </div>
+   
+   
+  <div class="container">
+    <a href="#">Каталог</a>
+    <p style="color: #777;">Мой магазин</p>
+
+    <div class="product">
+      <img src="https://vashdommebel.ru/images/product/019/019375/246-bbt5204-800f1-beige_1000_fabio.jpg" alt="Кресло">
+      <div style="margin-left: 10px;">
+        <h3>Кресло «Уют»</h3>
+        <p>Мягкое кресло для отдыха. Подходит для гостиной.</p>
+        <div class="price">250000 тнг</div>
+        <button class="btn" onclick="alert('Добавлено в корзину')">Купить</button>
+      </div>
+    </div>
+
+    <div class="product">
+      <img src="https://avatars.mds.yandex.net/i?id=4707d8e05cdd78f112d73d80d55ec3c4_l-5239800-images-thumbs&n=13" alt="Диван" width="120">
+      <div style="margin-left: 10px;">
+        <h3>Диван «Сон»</h3>
+        <p>Большой диван, раскладывается. Очень мягкий.</p>
+        <div class="price">1250000 тнг</div>
+        <button class="btn" onclick="alert('Добавлено в корзину')">Купить</button>
+      </div>
+    </div>
+    <div class="product">
+      <a href="C:\Users\1\Desktop\html\кровать.webp"></a>
+      <img src= "C:\Users\1\Desktop\html\кровать.webp" alt="Кровать" width="120">
+       <div style="margin-left:10px;">
+         <h3>Кровать «Sleepart Ития»</h3>
+         <p>Классическая кровать-для отдыха и сна в положении лёжа.</p>
+         <div class="price">554000 тнг </div>
+         <button class="btn" onclick="alert('Добавлено в корзину')">Купить</button>
+       </div>
+     </div>
+     <div class="product">
+      <img  src="https://avatars.mds.yandex.net/i?id=8ee373c9568ee9552e9fdf770baf1c1e7da7f08f4d454bae-10234572-images-thumbs&n=13" alt="шкаф" width="120">
+       <div style="margin-left:10px;">
+         <h3>Шкаф «Green Cupboard» </h3>
+         <p>Шкаф — мебельное изделие для хранения предметов различного функционального назначения.</p>
+         <div class="price">599990тнг </div>
+         <button class="btn" onclick="alert('Добавлено в корзину')">Купить</button>
+       </div>
+     </div>
+ <div class="product">
+  <img src="https://20.img.avito.st/image/1/1.1pTBzba4en33ZLh44aKKx6RveHt_bPh1t2l4f3Fkcnd3.3j4jgP6XLLgXx4BIZiEENehtydo3Y-xClcL1YrCNpp4" alt="Диван" width="120">
+  <div style="margin-left:10px;">
+    <h3>Диван «Comfort Luxe»</h3>
+    <p>Уютный трёхместный диван с мягкой обивкой и глубокими сиденьями.</p>
+    <div class="price">420 000 тнг</div>
+    <button class="btn" onclick="alert('Добавлено в корзину — Диван «Comfort Luxe»')">Купить</button>
+  </div>
+</div>
+
+<div class="product">
+  <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80" alt="Кресло" width="120">
+  <div style="margin-left:10px;">
+    <h3>Кресло «Relax Pro»</h3>
+    <p>Эргономичное кресло для чтения с высокой спинкой и мягкими подлокотниками.</p>
+    <div class="price">85 000 тнг</div>
+    <button class="btn" onclick="alert('Добавлено в корзину — Кресло «Relax Pro»')">Купить</button>
+  </div>
+</div>
+
+<div class="product">
+  <img src="https://avatars.mds.yandex.net/i?id=b443925d034c79dd0419e3e54700b7f843a972ae-11003961-images-thumbs&n=13" alt="Обеденный стол" width="120">
+  <div style="margin-left:10px;">
+    <h3>Стол «Oak Dining»</h3>
+    <p>Массивный обеденный стол из натурального дуба, рассчитан на 6 человек.</p>
+    <div class="price">310 000 тнг</div>
+    <button class="btn" onclick="alert('Добавлено в корзину — Стол «Oak Dining»')">Купить</button>
+  </div>
+</div>
+
+<div class="product">
+  <img src="https://avatars.mds.yandex.net/i?id=4863bcbd62d477ce35b8de61ca5cfa0108fa1383-4270998-images-thumbs&n=13" alt="Кровать" width="120">
+  <div style="margin-left:10px;">
+    <h3>Кровать «SleepWell»</h3>
+    <p>Широкая кровать с мягким изголовьем и местом для матраса 160×200.</p>
+    <div class="price">650 000 тнг</div>
+    <button class="btn" onclick="alert('Добавлено в корзину — Кровать «SleepWell»')">Купить</button>
+  </div>
+</div>
+
+<div class="product">
+  <img src="https://avatars.mds.yandex.net/i?id=c7b64ea87bde34a79c7faee536a025a6173532cc-12421615-images-thumbs&n=13" alt="Стеллаж" width="120">
+  <div style="margin-left:10px;">
+    <h3>Стеллаж «Nordic Shelf»</h3>
+    <p>Открытый стеллаж в скандинавском стиле для книг и декора.</p>
+    <div class="price">129 000 тнг</div>
+    <button class="btn" onclick="alert('Добавлено в корзину — Стеллаж «Nordic Shelf»')">Купить</button>
+  </div>
+</div>
+<div class="table-box">
+  <div class="table-title">Все товары</div>
+
+  <table class="table-products">
+    <tr>
+      <th>Фото</th>
+      <th>Название</th>
+      <th>Размер</th>
+      <th>Цена</th>
+    </tr>
+
+    <tr>
+      <td><img src="https://vashdommebel.ru/images/product/019/019375/246-bbt5204-800f1-beige_1000_fabio.jpg"></td>
+      <td>Кресло «Уют»</td>
+      <td>85×90×100 см</td>
+      <td>250 000 тнг</td>
+    </tr>
+
+    <tr>
+      <td><img src="https://avatars.mds.yandex.net/i?id=4707d8e05cdd78f112d73d80d55ec3c4_l-5239800-images-thumbs&n=13"></td>
+      <td>Диван «Сон»</td>
+      <td>230×100×95 см</td>
+      <td>1 250 000 тнг</td>
+    </tr>
+
+    <tr>
+      <td><img src="C:\Users\1\Desktop\html\кровать.webp"></td>
+      <td>Кровать «Sleepart Ития»</td>
+      <td>200×160×110 см</td>
+      <td>554 000 тнг</td>
+    </tr>
+
+    <tr>
+      <td><img src="https://avatars.mds.yandex.net/i?id=8ee373c9568ee9552e9fdf770baf1c1e7da7f08f4d454bae-10234572-images-thumbs&n=13"></td>
+      <td>Шкаф «Green Cupboard»</td>
+      <td>210×120×55 см</td>
+      <td>599 990 тнг</td>
+    </tr>
+
+    <tr>
+      <td><img src="https://20.img.avito.st/image/1/1.1pTBzba4en33ZLh44aKKx6RveHt_bPh1t2l4f3Fkcnd3.3j4jgP6XLLgXx4BIZiEENehtydo3Y-xClcL1YrCNpp4"></td>
+      <td>Диван «Comfort Luxe»</td>
+      <td>245×105×95 см</td>
+      <td>420 000 тнг</td>
+    </tr>
+
+    <tr>
+      <td><img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"></td>
+      <td>Кресло «Relax Pro»</td>
+      <td>80×85×105 см</td>
+      <td>85 000 тнг</td>
+    </tr>
+
+    <tr>
+      <td><img src="https://avatars.mds.yandex.net/i?id=b443925d034c79dd0419e3e54700b7f843a972ae-11003961-images-thumbs&n=13"></td>
+      <td>Стол «Oak Dining»</td>
+      <td>180×90×75 см</td>
+      <td>310 000 тнг</td>
+    </tr>
+
+    <tr>
+      <td><img src="https://avatars.mds.yandex.net/i?id=4863bcbd62d477ce35b8de61ca5cfa0108fa1383-4270998-images-thumbs&n=13"></td>
+      <td>Кровать «SleepWell»</td>
+      <td>200×160×118 см</td>
+      <td>650 000 тнг</td>
+    </tr>
+
+    <tr>
+      <td><img src="https://avatars.mds.yandex.net/i?id=c7b64ea87bde34a79c7faee536a025a6173532cc-12421615-images-thumbs&n=13"></td>
+      <td>Стеллаж «Nordic Shelf»</td>
+      <td>190×80×35 см</td>
+      <td>129 000 тнг</td>
+    </tr>
+
+  </table>
+</div>
+
+<button type="button" id="backBtn">← Назад</button>
+<button type="button" id="forwardBtn">Вперед →</button>
+<script>
+  document.getElementById('backBtn').addEventListener('click', () => {
+    history.back(); 
+  });
+
+  document.getElementById('forwardBtn').addEventListener('click', () => {
+    history.forward();
+  });
+</script>
+  
+<style>
+  #cartToggle { position: fixed; right: 20px; bottom: 20px; z-index: 9999; }
+  #cartPanel { position: fixed; right: 20px; bottom: 70px; width: 320px; max-height: 420px; overflow:auto;
+               background:#fff; border:1px solid #ccc; padding:12px; box-shadow:0 6px 18px rgba(0,0,0,.15); display:none; z-index:9999; }
+  #cartPanel ul { list-style:none; padding:0; margin:0 0 10px 0; }
+  #cartPanel li { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid #eee; }
+  .cart-remove { background:transparent; border:none; color:#d00; cursor:pointer; }
+</style>
+
+<button id="cartToggle" class="btn">Корзина (<span id="cartCount">0</span>)</button>
+
+<div id="cartPanel" aria-hidden="true">
+  <h3>В корзине</h3>
+  <ul id="cartItems"></ul>
+  <div><strong>Итого: <span id="cartTotal">0</span> тнг</strong></div>
+  <div style="margin-top:8px;">
+    <button id="clearCart" class="btn" style="background:#dc3545">Очистить</button>
+    <button id="checkout" class="btn" style="margin-left:8px">Оформить</button>
+  </div>
+</div>
+
+<script>
+  const cart = JSON.parse(localStorage.getItem('mebmag_cart') || '[]');
+
+  function formatPrice(n){ return n.toLocaleString('ru-RU'); }
+
+  function saveCart(){
+    localStorage.setItem('mebmag_cart', JSON.stringify(cart));
+    renderCart();
+  }
+
+  function addToCart(item){
+    const exist = cart.find(i => i.name === item.name);
+    if(exist) exist.qty += item.qty;
+    else cart.push(item);
+    saveCart();
+  }
+
+  function removeFromCart(name){
+    const idx = cart.findIndex(i => i.name === name);
+    if(idx !== -1) cart.splice(idx,1);
+    saveCart();
+  }
+
+  function clearCart(){ cart.length = 0; saveCart(); }
+
+  function getTotal(){
+    return cart.reduce((s,i)=> s + i.price * i.qty, 0);
+  }
+
+  function renderCart(){
+    document.getElementById('cartCount').textContent = cart.reduce((s,i)=> s + i.qty, 0);
+    const list = document.getElementById('cartItems');
+    list.innerHTML = '';
+    cart.forEach(it => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <span>${it.name} <small>×${it.qty}</small></span>
+        <span>${formatPrice(it.price * it.qty)} тнг
+          <button class="cart-remove" data-name="${it.name}">✕</button>
+        </span>`;
+      list.appendChild(li);
+    });
+    document.getElementById('cartTotal').textContent = formatPrice(getTotal());
+    document.getElementById('cartPanel').style.display = cart.length ? 'block' : 'none';
+    document.querySelectorAll('.cart-remove').forEach(b => b.addEventListener('click', e => {
+      removeFromCart(e.currentTarget.dataset.name);
+    }));
+  }
+
+  document.querySelectorAll('.btn').forEach(btn => {
+    if(btn.classList.contains('btn') && btn.dataset && btn.dataset.name && btn.dataset.price){
+      btn.addEventListener('click', () => {
+        addToCart({ name: btn.dataset.name, price: Number(btn.dataset.price), qty: 1 });
+        alert(`Добавлено в корзину — ${btn.dataset.name}`);
+      });
+    }
+  });
+
+  document.querySelectorAll('.product').forEach(product => {
+    const buy = product.querySelector('.btn');
+    if(!buy) return;
+    if(buy.dataset.name && buy.dataset.price) return;
+    const titleEl = product.querySelector('h3');
+    const priceEl = product.querySelector('.price');
+    if(titleEl && priceEl){
+      const rawPrice = Number(priceEl.textContent.replace(/\s|тнг|₸|[^\d]/g, '')) || 0;
+      buy.dataset.name = titleEl.textContent.trim();
+      buy.dataset.price = rawPrice;
+      buy.addEventListener('click', () => {
+        addToCart({ name: buy.dataset.name, price: Number(buy.dataset.price), qty: 1 });
+        alert(`Добавлено в корзину — ${buy.dataset.name}`);
+      });
+    }
+  });
+
+  document.getElementById('cartToggle').addEventListener('click', () => {
+    const panel = document.getElementById('cartPanel');
+    const shown = panel.style.display === 'block';
+    panel.style.display = shown ? 'none' : (cart.length ? 'block' : 'block');
+  });
+  document.getElementById('clearCart').addEventListener('click', () => {
+    if(confirm('Очистить корзину?')) clearCart();
+  });
+  document.getElementById('checkout').addEventListener('click', () => {
+    if(cart.length === 0){ alert('Корзина пуста'); return; }
+    alert('Имитация оформления заказа. Сумма: ' + formatPrice(getTotal()) + ' тнг');
+    clearCart();
+  });
+
+  renderCart();
+</script>
+<style>
+  #checkoutModal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,.5); z-index: 10000; }
+  #checkoutBox { background:#fff; padding:16px; width: 420px; max-width: 94%; border-radius:6px; box-shadow:0 8px 30px rgba(0,0,0,.2); }
+  #checkoutBox label{ display:block; margin:8px 0 4px; font-size:14px; }
+  #checkoutBox input, #checkoutBox textarea, #checkoutBox select { width:100%; padding:8px; box-sizing:border-box; }
+  #checkoutActions { margin-top:10px; display:flex; gap:8px; justify-content:flex-end; }
+</style>
+
+<div id="checkoutModal" role="dialog" aria-hidden="true">
+  <div id="checkoutBox">
+    <h3>Оформление заказа</h3>
+    <div id="orderSummary" style="font-size:14px; margin-bottom:8px;"></div>
+
+    <label for="custName">ФИО</label>
+    <input id="custName" type="text" placeholder="Мағжан">
+
+    <label for="custPhone">Телефон</label>
+    <input id="custPhone" type="tel" placeholder="87475729122">
+
+    <label for="custEmail">Email (необязательно)</label>
+    <input id="custEmail" type="email" placeholder="magzhantolebai07@gmail.com">
+
+    <label for="custAddr">Адрес / комментарий</label>
+    <textarea id="custAddr" rows="2" placeholder="Алматы улица Розыбакиева 289"></textarea>
+
+    <label for="payMethod">Способ оплаты</label>
+    <select id="payMethod">
+      <option value="cash">Наличные при доставке</option>
+      <option value="card">Картой при доставке</option>
+      <option value="online">Онлайн-оплата (карта)</option>
+    </select>
+
+    <div id="checkoutActions">
+      <button id="checkoutCancel" class="btn" style="background:#6c757d">Отмена</button>
+      <button id="checkoutSubmit" class="btn">Отправить заказ</button>
+    </div>
+
+    <div id="checkoutMsg" style="margin-top:8px;color:#d00;display:none"></div>
+  </div>
+</div>
+</body>
+  </html>

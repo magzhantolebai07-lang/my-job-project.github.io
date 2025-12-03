@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Магазин мебели «MebMag»</title>
+  <style>
+    :root{
+      --overlay: rgba(0,0,0,0.35);
+      --text-color: #ffffff;
+      --accent: #337ab7;
+    }
+
+   
+    html, body { height:100%; margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; color: #222; background: #f0f0f0; }
+    a { color: inherit; }
+
+    
+    body {
+      background: url('https://images.unsplash.com/photo-1540574163026-643ea20ade25?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat fixed;
+    }
+    .hero {
+      position: relative;
+      min-height: 60vh; 
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding: 2rem;
+      color: var(--text-color);
+    }
+   
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--overlay);
+      z-index: 0;
+    }
+    .hero > .hero-content { position: relative; z-index: 1; max-width: 1100px; }
+    .hero h1 {
+      margin: 0;
+      font-weight: 700;
+      font-size: clamp(32px, 8vw, 96px);
+      letter-spacing: 0.3px;
+    }
+    .hero .tagline {
+      display: block;
+      margin-top: 0.4rem;
+      font-size: clamp(14px, 2.2vw, 20px);
+      opacity: 0.95;
+    }
+    .video-link {
+      display: inline-block;
+      margin-top: 1.2rem;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      color: var(--text-color);
+      border: 2px solid var(--text-color);
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .video-link:hover,
+    .video-link:focus {
+      background-color: var(--text-color);
+      color: #000000;
+      outline: none;
+    }
+    .site-header {
+      background: var(--accent);
+      color: #fff;
+      padding: 12px;
+      text-align: center;
+    }
+    .site-header .nav a { color: #fff; text-decoration: none; margin: 0 6px; }
+    .catalog {
+      max-width: 1000px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 16px;
+      border: 1px solid #ccc;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    }
+    .catalog a.catalog-link { display:inline-block; margin-bottom:8px; color: #337ab7; text-decoration: none; }
+
+    .product {
+      border: 1px solid #eee;
+      padding: 10px;
+      margin: 10px 0;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .product img {
+      width: 120px;
+      height: 100px;
+      object-fit: cover;
+      background: #f5f5f5;
+      border: 1px solid #ddd;
+    }
+    .price { color: red; font-weight: bold; margin-top: 6px; }
+    .btn { background: #28a745; color: #fff; border: none; padding: 6px 8px; border-radius: 3px; cursor: pointer; }
+
+    .footer { text-align: center; color: #666; font-size: 12px; padding: 14px 0; }
+
+    @media (max-width: 720px) {
+      .product { flex-direction: row; }
+      .catalog { margin: 12px; padding: 12px; }
+      .hero { padding: 1.2rem; min-height: 48vh; }
+    }
+    @supports (-webkit-touch-callout: none) {
+      body { background-attachment: scroll; }
+    }
+  
+@media (prefers-reduced-motion: reduce) {
+  .animated, .product, .hero-content, .btn { transition: none !important; animation: none !important; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+@keyframes floatY {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+/* initial hidden for scroll reveal */
+.animated { opacity: 0; transform: translateY(14px); transition: opacity 420ms ease, transform 420ms cubic-bezier(.2,.9,.2,1); }
+.animated.in-view { opacity: 1; transform: translateY(0); }
+
+/* Hero */
+.hero-content.animated { animation: fadeInUp 700ms ease both; }
+
+/* Product card hover */
+.product {
+  transition: transform 260ms cubic-bezier(.2,.9,.2,1), box-shadow 260ms ease;
+  will-change: transform;
+  transform-origin: center;
+  backface-visibility: hidden;
+}
+.product:hover,
+.product:focus-within {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 18px 36px rgba(34,34,34,0.12);
+  z-index: 2;
+}
+
+/* Image zoom inside product */
+.product img {
+  transition: transform 420ms cubic-bezier(.2,.9,.2,1);
+}
+.product:hover img { transform: scale(1.07); }
+
+/* Button animations */
+.btn {
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+  will-change: transform;
+}
+.btn:hover, .btn:focus {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+}
+
+/* Price pulse on hover */
+.price {
+  display: inline-block;
+  transition: transform 220ms ease, color 220ms ease;
+}
+.price:hover { animation: pulse 900ms ease 1; color: #c41616; }
+
+/* Video link subtle float */
+.video-link {
+  display: inline-block;
+  transform-origin: center;
+  transition: transform 420ms cubic-bezier(.2,.9,.2,1);
+}
+.video-link:hover { animation: floatY 1600ms ease-in-out infinite; }
+
+/* Add-to-cart click feedback */
+.btn.add-feedback {
+  position: relative;
+  overflow: visible;
+}
+.btn.add-feedback:active {
+  transform: scale(.96);
+}
+
+/* Small toast hint (appears after add) */
+.toast-add {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 260ms ease, transform 260ms ease;
+  z-index: 9999;
+}
+.toast-add.show { opacity: 1; transform: translateY(0); }
+
+a:focus, button:focus {
+  outline: 3px solid rgba(51,122,183,0.25);
+  outline-offset: 3px;
+}
+
+  </style>
+<style>
+  /* Базовый курсор */
+  body {
+    cursor: url('photo/pack399.png'), auto;
+  }
+
+  /* Наведение на кнопки */
+  button, .btn, a {
+    cursor: url('photo/pack399.png'), pointer;
+  }
+</style>
+</head>
+<body>
+
+  <section class="hero" role="banner" aria-label="MebMag — главный баннер">
+    <div class="hero-content">
+      <h1>MebMag</h1>
+      <span class="tagline">Строй магазин</span>
+      <div>
+        <a href="https://www.youtube.com/watch?v=WTt1Z0VVPgg" target="_blank" rel="noopener" class="video-link">
+          Смотреть видео о обзор производства мебели
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <header class="site-header" role="navigation" aria-label="Основная навигация">
+    <h2 style="margin:0;">Магазин мебели «MebMag»</h2>
+    <div class="nav" style="margin-top:8px;">
+      <a href="главная.html">Главная</a> |
+      <a href="дз.html">Каталог</a> |
+      <a href="contact.html">Контакты</a>
+    </div>
+  </header>
+
+  <main class="catalog" role="main" aria-label="Каталог мебели">
+    <a class="catalog-link" href="#">Каталог</a>
+    <p style="color: #777; margin-top:6px;">Мой магазин</p>
+
+    <article class="product" aria-label="Кресло Уют">
+      <img src="https://vashdommebel.ru/images/product/019/019375/246-bbt5204-800f1-beige_1000_fabio.jpg" alt="Кресло Уют">
+      <div style="flex:1;">
+        <h3 style="margin:0 0 6px 0;">Кресло «Уют»</h3>
+        <p style="margin:0 0 6px 0;">Мягкое кресло для отдыха. Подходит для гостиной.</p>
+        <div class="price">250 000 тнг</div>
+        <button class="btn" onclick="alert('Добавлено в корзину — Кресло «Уют»')">Купить</button>
+      </div>
+    </article>
+
+    <article class="product" aria-label="Диван Сон">
+      <img src="https://avatars.mds.yandex.net/i?id=4707d8e05cdd78f112d73d80d55ec3c4_l-5239800-images-thumbs&n=13" alt="Диван Сон">
+      <div style="flex:1;">
+        <h3 style="margin:0 0 6px 0;">Диван «Сон»</h3>
+        <p style="margin:0 0 6px 0;">Большой диван, раскладывается. Очень мягкий.</p>
+        <div class="price">1 250 000 тнг</div>
+        <button class="btn" onclick="alert('Добавлено в корзину — Диван «Сон»')">Купить</button>
+      </div>
+    </article>
+
+    <article class="product" aria-label="Кровать Sleepart Ития">
+      <img src="C:\Users\1\Desktop\html\кровать.webp" alt="Кровать Sleepart Ития">
+      <div style="flex:1;">
+        <h3 style="margin:0 0 6px 0;">Кровать «Sleepart Ития»</h3>
+        <p style="margin:0 0 6px 0;">Классическая кровать для отдыха и сна.</p>
+        <div class="price">554 000 тнг</div>
+        <button class="btn" onclick="alert('Добавлено в корзину — Кровать «Sleepart Ития»')">Купить</button>
+      </div>
+    </article>
+
+    <article class="product" aria-label="Шкаф Green Cupboard">
+      <img src="https://avatars.mds.yandex.net/i?id=8ee373c9568ee9552e9fdf770baf1c1e7da7f08f4d454bae-10234572-images-thumbs&n=13" alt="Шкаф Green Cupboard">
+      <div style="flex:1;">
+        <h3 style="margin:0 0 6px 0;">Шкаф «Green Cupboard»</h3>
+        <p style="margin:0 0 6px 0;">Шкаф — мебельное изделие для хранения предметов различного назначения.</p>
+        <div class="price">599 990 тнг</div>
+        <button class="btn" onclick="alert('Добавлено в корзину — Шкаф «Green Cupboard»')">Купить</button>
+      </div>
+    </article>
+<section id="about" class="about" role="region" aria-label="О владельце — MebMag">
+  <div class="about-inner">
+    <div class="about-text">
+      <h2>Обо мне</h2>
+      <p>Здравствуйте! Меня зовут <strong>Мағжан Төлебай</strong> и я рад приветствовать вас в нашем мебельном салоне.
+      Я и моя команда верим, что дом начинается не со стен, а с атмосферы, которую создает правильно подобранная мебель. Наша миссия — помочь вам воплотить мечты об идеальном интерьере в реальность.
+      Мы предлагаем широкий ассортимент мебели: от классических спален и функциональных кухонь до современных гостиных и эргономичных офисных решений. Особое внимание мы уделяем качеству материалов, надежной фурнитуре и деталям, которые делают нашу мебель не просто красивой, но и долговечной.</p>
+    </div>
+  </div>
+</section>
+
+    <div class="footer" role="contentinfo">© MebMag — все права защищены</div>
+<button type="button" id="forwardBtn">Вперед →</button>
+
+  </main>
+<script>
+  document.getElementById('backBtn').addEventListener('click', () => {
+    history.back(); // или history.go(-1)
+  });
+
+  document.getElementById('forwardBtn').addEventListener('click', () => {
+    history.forward(); // или history.go(1)
+  });
+</script>
+
+</body>
+</html>
